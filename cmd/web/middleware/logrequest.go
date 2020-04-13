@@ -21,5 +21,5 @@ func NewLogRequestMiddleware(app common.Application, next http.Handler) http.Han
 
 func (l LogRequestMiddleware) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	l.app.Logger.InfoLog.Printf("%s - %s %s %s", r.RemoteAddr, r.Proto, r.Method, r.URL.RequestURI())
-	l.next.ServeHTTP(w, r)
+	l.next.ServeHTTP(rw, r)
 }

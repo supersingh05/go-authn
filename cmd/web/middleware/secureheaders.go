@@ -19,7 +19,7 @@ func NewSecureHeadersMiddleware(app common.Application, next http.Handler) http.
 	}
 }
 
-func (s SecureHeadersMiddleware) ServeHttp(rw http.ResponseWriter, r *http.Request) {
+func (s SecureHeadersMiddleware) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("X-XSS-Protection", "1; mode=block")
 	rw.Header().Set("X-Frame-Options", "deny")
 	s.next.ServeHTTP(rw, r)
