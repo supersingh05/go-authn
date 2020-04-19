@@ -4,10 +4,15 @@ import (
 	"fmt"
 	"net/http"
 	"runtime/debug"
+
+	"github.com/supersingh05/go-authn/pkg/authn"
+	"github.com/supersingh05/go-authn/pkg/models"
 )
 
 type Application struct {
 	Logger Logger
+	Auth   authn.Auth
+	Users  models.UserDatastore
 }
 
 func (app *Application) ServerError(w http.ResponseWriter, err error) {
@@ -22,5 +27,5 @@ func (app *Application) ClientError(w http.ResponseWriter, status int) {
 }
 
 func (app *Application) NotFound(w http.ResponseWriter) {
-	app.Logger.ClientError(w, http.StatusNotFound)
+	app.ClientError(w, http.StatusNotFound)
 }

@@ -31,6 +31,7 @@ func routes(cfg config.Config, app common.Application) http.Handler {
 	secureHeaders := middleware.NewSecureHeadersMiddleware(app, mux)
 	logMiddleware := middleware.NewLogRequestMiddleware(app, secureHeaders)
 	recoverPanic := middleware.NewSecureHeadersMiddleware(app, logMiddleware)
+	standardResponseHeaders := middleware.NewResponseHeadersMiddleware(app, recoverPanic)
 
-	return recoverPanic
+	return standardResponseHeaders
 }
