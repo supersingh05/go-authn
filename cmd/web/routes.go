@@ -23,6 +23,8 @@ func routes(cfg config.Config, app common.Application) http.Handler {
 	onlyAllowPostReset := middleware.NewMethodsAllowedMiddleware(app, []string{http.MethodPost}, handler.NewResetPasswordHandler(app))
 	mux.Handle("/resetpassword", onlyAllowPostReset)
 
+	mux.Handle("/token", handler.NewTokenHandler(app))
+
 	// file server
 	fileServer := http.FileServer(http.Dir(cfg.StaticDir))
 	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
