@@ -1,7 +1,7 @@
 package models
 
 type UserDatastore interface {
-	Insert(name, email, password string) error
+	Insert(firstname, lastname, email, password string) error
 
 	Authenticate(email, password string) (int, error)
 

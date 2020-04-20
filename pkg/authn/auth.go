@@ -8,7 +8,7 @@ import (
 
 type Auth interface {
 	IsTokenValid() (bool, error)
-	CreateToken(username string) (string, error)
+	CreateToken(email string, userid int) (string, error)
 }
 
 type SimpleAuth struct {
@@ -27,9 +27,10 @@ func (s SimpleAuth) IsTokenValid() (bool, error) {
 	return true, nil
 }
 
-func (s SimpleAuth) CreateToken(username string) (string, error) {
+func (s SimpleAuth) CreateToken(email string, userid int) (string, error) {
 	claims := Claims{
-		Username: username,
+		Email: email,
+		ID:    userid,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(s.tokenLife).Unix(),
 		},

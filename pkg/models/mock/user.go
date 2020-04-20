@@ -8,7 +8,7 @@ type UserModel struct {
 }
 
 // We'll use the Insert method to add a new record to the users table.
-func (m *UserModel) Insert(name, email, password string) error {
+func (m *UserModel) Insert(firstname, lastname, email, password string) error {
 	return nil
 }
 
